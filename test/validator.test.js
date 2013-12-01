@@ -766,6 +766,18 @@ module.exports = {
         });
     },
 
+    'test #isISBN()': function() {
+        assert.ok(Validator.check('340101319X').isISBN());
+        assert.ok(Validator.check('9784873113685').isISBN());
+
+        assert.throws(function() {
+            Validator.check('3423214121').isISBN();
+        });
+        assert.throws(function() {
+            Validator.check('9783836221190').isISBN();
+        });
+    },
+
     'test error is instanceof ValidatorError': function() {
         try {
             Validator.check('not_an_email', 'Invalid').isEmail();
