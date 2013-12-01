@@ -112,6 +112,7 @@ notIn(options)
 max(val)
 min(val)
 isCreditCard()                  //Will work against Visa, MasterCard, American Express, Discover, Diners Club, and JCB card numbering formats
+isISBN10()
 ```
 
 ## List of sanitization / filter methods

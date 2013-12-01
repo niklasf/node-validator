@@ -720,6 +720,30 @@ module.exports = {
         });
     },
 
+    'test #isISBN10()': function() {
+        var good = [
+            '3836221195', '3-8362-2119-5', '3 8362 2119 5',
+            '1617290858', '1-61729-085-8', '1 61729 085-8',
+            '0007269706', '0-00-726970-6', '0 00 726970 6',
+            '3423214120', '3-423-21412-0', '3 423 21412 0',
+            '340101319X', '3-401-01319-X', '3 401 01319 X' ];
+
+        good.forEach(function(isbn) {
+            assert.ok(Validator.check(isbn).isISBN10());
+        });
+
+        var bad = [
+            '3423214121', '3-423-21412-1', '3 423 21412 1',
+            '978-3836221191', '9783836221191',
+            '123456789a' ];
+
+        bad.forEach(function(isbn) {
+            assert.throws(function() {
+                Validator.check(isbn).isISBN10();
+            });
+        });
+    },
+
     'test error is instanceof ValidatorError': function() {
         try {
             Validator.check('not_an_email', 'Invalid').isEmail();
