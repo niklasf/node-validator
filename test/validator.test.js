@@ -744,6 +744,28 @@ module.exports = {
         });
     },
 
+    'test #isISBN13()': function() {
+        var good = [
+            '9783836221191', '978-3-8362-2119-1', '978 3 8362 2119 1',
+            '9783401013190', '978-3401013190', '978 3401013190',
+            '9784873113685', '978-4-87311-368-5', '978 4 87311 368 5' ];
+
+        good.forEach(function(isbn) {
+            assert.ok(Validator.check(isbn).isISBN13());
+        });
+
+        var bad = [
+            '9783836221190', '978-3-8362-2119-0', '978 3 8362 2119 0',
+            '3836221195', '3-8362-2119-5', '3 8362 2119 5',
+            '01234567890ab' ];
+
+        bad.forEach(function(isbn) {
+            assert.throws(function() {
+                Validator.check(isbn).isISBN13();
+            });
+        });
+    },
+
     'test error is instanceof ValidatorError': function() {
         try {
             Validator.check('not_an_email', 'Invalid').isEmail();
